@@ -13,7 +13,7 @@ const UserIcon = styled.img`
   ${props => props.tweet && "float: left;"}
 `;
 
-const container = styled.div`
+const Container = styled.div`
   margin: ${props => props.margin || "0"};
   padding: ${props => props.padding || "0"};
 `;
@@ -41,7 +41,7 @@ function TweetIcon(props) {
   )
 }
 
-function TweetDetail(props) {
+function TweetHeader(props) {
   return (
     <div>
       <Text>{props.name}</Text>
@@ -61,7 +61,7 @@ class Tweet extends React.Component {
     return (
       <div>
         <TweetIcon iconURL={data.icon} />
-        <TweetDetail name={data.name} id={data.id} />
+        <TweetHeader name={data.name} id={data.id} />
         <TweetText text={data.text} />
       </div>
     );
@@ -71,9 +71,9 @@ class Tweet extends React.Component {
 class MainColumn extends React.Component {
   render() {
     return (
-      <container>
+      <Container>
         <Tweet />
-      </container>
+      </Container>
     )
   }
 }

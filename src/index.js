@@ -1,15 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 
 // style
-const Text = styled.span``;
+const Text = styled.span`
+  color: white;
+`;
 
 const UserIcon = styled.img`
+  border-radius: 50%;
   ${props => props.tweet && "float: left;"}
 `;
 
+const container = styled.div`
+  margin: ${props => props.margin || "0"};
+  padding: ${props => props.padding || "0"};
+`;
+
+const Screen = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(21, 32, 43);
+`;
+
+const GlobalStyle = createGlobalStyle`
+  body {margin: 0;}
+`;
 
 // main
 function TweetText(props) {
@@ -36,7 +53,7 @@ function TweetDetail(props) {
 class Tweet extends React.Component {
   render() {
     const data = {
-      text: "Hello, Twitter.",
+      text: "Hello, Twitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. magna aliqua.",
       icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
       name: "お名前",
       id: "twitterID"
@@ -51,10 +68,23 @@ class Tweet extends React.Component {
   }
 }
 
+class MainColumn extends React.Component {
+  render() {
+    return (
+      <container>
+        <Tweet />
+      </container>
+    )
+  }
+}
+
 class App extends React.Component {
   render() {
     return (
-      <Tweet />
+      <Screen>
+        <GlobalStyle />
+        <MainColumn />
+      </Screen>
     );
   }
 }

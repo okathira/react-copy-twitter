@@ -1,28 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import styled from 'styled-components';
 
 
+// style
+const Text = styled.span``;
+
+const UserIcon = styled.img`
+  ${props => props.tweet && "float: left;"}
+`;
+
+
+// main
 function TweetText(props) {
   return (
-    <span className="tweet-text">
-      {props.text}
-    </span>
+    <Text>{props.text}</Text>
   )
 }
 
 function TweetIcon(props) {
   return (
-    <img className="tweet-icon" src={props.iconURL} alt="icon"></img>
+    <UserIcon src={props.iconURL} alt="user-icon" tweet></UserIcon>
   )
 }
 
 function TweetDetail(props) {
   return (
-    <p>
-      <span className="tweet-name">{props.name}</span>
-      <span className="tweet-id">@{props.id}</span>
-    </p>
+    <div>
+      <Text>{props.name}</Text>
+      <Text>@{props.id}</Text>
+    </div>
   )
 }
 
@@ -35,7 +42,7 @@ class Tweet extends React.Component {
       id: "twitterID"
     }
     return (
-      <div className="tweet">
+      <div>
         <TweetIcon iconURL={data.icon} />
         <TweetDetail name={data.name} id={data.id} />
         <TweetText text={data.text} />

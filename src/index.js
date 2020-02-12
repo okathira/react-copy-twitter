@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 
 
 // style
@@ -10,7 +10,9 @@ const Text = styled.span`
 
 const UserIcon = styled.img`
   border-radius: 50%;
-  ${props => props.tweet && "float: left;"}
+  ${props => props.tweet && css`
+    float: left;
+  `}
 `;
 
 const Container = styled.div`
@@ -43,10 +45,10 @@ function TweetIcon(props) {
 
 function TweetHeader(props) {
   return (
-    <div>
+    <Container>
       <Text>{props.name}</Text>
       <Text>@{props.id}</Text>
-    </div>
+    </Container>
   )
 }
 
@@ -59,11 +61,11 @@ class Tweet extends React.Component {
       id: "twitterID"
     }
     return (
-      <div>
+      <Container>
         <TweetIcon iconURL={data.icon} />
         <TweetHeader name={data.name} id={data.id} />
         <TweetText text={data.text} />
-      </div>
+      </Container>
     );
   }
 }

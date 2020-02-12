@@ -15,9 +15,22 @@ const UserIcon = styled.img`
   `}
 `;
 
+const border = css`
+  border-width: 1px;
+  border-color: rgb(56, 68, 77);
+`;
+
 const Container = styled.div`
-  margin: ${props => props.margin || "0"};
-  padding: ${props => props.padding || "0"};
+  align-items: center;
+  ${props => props.borderRL && css `
+    border-style: none solid;
+    ${border}
+  `}
+  ${props => props.main && css`
+    width: 600px;
+    height: 100%;
+    margin: auto 20%;
+  `}
 `;
 
 const Screen = styled.div`
@@ -73,7 +86,7 @@ class Tweet extends React.Component {
 class MainColumn extends React.Component {
   render() {
     return (
-      <Container>
+      <Container main borderRL>
         <Tweet />
       </Container>
     )

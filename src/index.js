@@ -10,9 +10,18 @@ const Text = styled.span`
 
 const UserIcon = styled.img`
   border-radius: 50%;
+  width: 49px;
 `;
 
 const Container = styled.div`
+  ${props => props.margin && css`
+    margin: ${props.margin};
+  `}
+
+  ${props => props.padding && css`
+    padding: ${props.padding};
+  `}
+
   ${props => props.sideBySide && css`
     display: flex;
     align-items: stretch;
@@ -79,8 +88,8 @@ class Tweet extends React.Component {
       id: "twitterID"
     }
     return (
-      <Container sideBySide borderTB>
-        <Container>
+      <Container sideBySide borderTB padding="10px">
+        <Container margin="0 10px">
           <TweetIcon iconURL={data.icon} />
         </Container>
         <Container>

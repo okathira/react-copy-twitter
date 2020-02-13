@@ -10,9 +10,6 @@ const Text = styled.span`
 
 const UserIcon = styled.img`
   border-radius: 50%;
-  ${props => props.tweet && css`
-    float: left;
-  `}
 `;
 
 const border = css`
@@ -21,11 +18,16 @@ const border = css`
 `;
 
 const Container = styled.div`
-  align-items: center;
-  ${props => props.borderRL && css `
+  ${props => props.sideBySide && css`
+    display: flex;
+    align-items: stretch;
+  `}
+
+  ${props => props.borderRL && css`
     border-style: none solid;
     ${border}
   `}
+  
   ${props => props.main && css`
     width: 600px;
     height: 100%;
@@ -52,7 +54,7 @@ function TweetText(props) {
 
 function TweetIcon(props) {
   return (
-    <UserIcon src={props.iconURL} alt="user-icon" tweet></UserIcon>
+    <UserIcon src={props.iconURL} alt="user-icon"></UserIcon>
   )
 }
 
@@ -74,10 +76,14 @@ class Tweet extends React.Component {
       id: "twitterID"
     }
     return (
-      <Container>
-        <TweetIcon iconURL={data.icon} />
-        <TweetHeader name={data.name} id={data.id} />
-        <TweetText text={data.text} />
+      <Container sideBySide>
+        <Container>
+          <TweetIcon iconURL={data.icon} />
+        </Container>
+        <Container>
+          <TweetHeader name={data.name} id={data.id} />
+          <TweetText text={data.text} />
+        </Container>
       </Container>
     );
   }

@@ -12,20 +12,23 @@ const UserIcon = styled.img`
   border-radius: 50%;
 `;
 
-const border = css`
-  border-width: 1px;
-  border-color: rgb(56, 68, 77);
-`;
-
 const Container = styled.div`
   ${props => props.sideBySide && css`
     display: flex;
     align-items: stretch;
   `}
 
-  ${props => props.borderRL && css`
-    border-style: none solid;
-    ${border}
+  ${props => (props.borderRL || props.borderTB) && css` 
+    ${props.borderRL && css`
+      border-right: solid;
+      border-left: solid;
+    `}
+    ${props.borderTB && css`
+      border-top: solid;
+      border-bottom: solid;
+    `}
+    border-width: 1px;
+    border-color: rgb(56, 68, 77);
   `}
   
   ${props => props.main && css`
@@ -76,7 +79,7 @@ class Tweet extends React.Component {
       id: "twitterID"
     }
     return (
-      <Container sideBySide>
+      <Container sideBySide borderTB>
         <Container>
           <TweetIcon iconURL={data.icon} />
         </Container>

@@ -24,11 +24,15 @@ const Container = styled.div`
   `}
 `;
 
+const MainColumnHeaderContainer = styled.div`
+  padding: 15px;
+  border-bottom: ${borderStyle};
+`;
+
 const TweetContainer = styled.div`
   padding: 10px;
   display: flex;
   align-items: stretch;
-  border-top: ${borderStyle};
   border-bottom: ${borderStyle};
 `;
 
@@ -54,13 +58,13 @@ const GlobalStyle = createGlobalStyle`
 function TweetText(props) {
   return (
     <Text>{props.text}</Text>
-  )
+  );
 }
 
 function TweetIcon(props) {
   return (
     <UserIcon src={props.iconURL} alt="user-icon"></UserIcon>
-  )
+  );
 }
 
 function TweetHeader(props) {
@@ -69,7 +73,17 @@ function TweetHeader(props) {
       <Text>{props.name}</Text>
       <Text>@{props.id}</Text>
     </Container>
-  )
+  );
+}
+
+class MainColumnHeader extends React.Component {
+  render() {
+    return (
+      <MainColumnHeaderContainer>
+        <Text>ホーム</Text>
+      </MainColumnHeaderContainer>
+    );
+  }
 }
 
 class Tweet extends React.Component {
@@ -79,7 +93,7 @@ class Tweet extends React.Component {
       icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
       name: "お名前",
       id: "twitterID"
-    }
+    };
     return (
       <TweetContainer>
         <Container margin="0 10px">
@@ -98,9 +112,11 @@ class MainColumn extends React.Component {
   render() {
     return (
       <MainColumnContainer>
+        <MainColumnHeader />
+        <Tweet />
         <Tweet />
       </MainColumnContainer>
-    )
+    );
   }
 }
 

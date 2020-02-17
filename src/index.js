@@ -108,13 +108,23 @@ class Tweet extends React.Component {
   }
 }
 
+class TweetScroller extends React.Component {
+  render() {
+    return(
+      <Container>
+        <Tweet />
+        <Tweet />
+      </Container>
+    );
+  }
+}
+
 class MainColumn extends React.Component {
   render() {
     return (
       <MainColumnContainer>
         <MainColumnHeader />
-        <Tweet />
-        <Tweet />
+        <TweetScroller />
       </MainColumnContainer>
     );
   }

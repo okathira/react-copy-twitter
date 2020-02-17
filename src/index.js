@@ -4,6 +4,8 @@ import styled, { createGlobalStyle, css } from 'styled-components';
 
 
 // style
+const borderStyle = "1px solid rgb(56, 68, 77)";
+
 const Text = styled.span`
   color: white;
 `;
@@ -17,34 +19,25 @@ const Container = styled.div`
   ${props => props.margin && css`
     margin: ${props.margin};
   `}
-
   ${props => props.padding && css`
     padding: ${props.padding};
   `}
+`;
 
-  ${props => props.sideBySide && css`
-    display: flex;
-    align-items: stretch;
-  `}
+const TweetContainer = styled.div`
+  padding: 10px;
+  display: flex;
+  align-items: stretch;
+  border-top: ${borderStyle};
+  border-bottom: ${borderStyle};
+`;
 
-  ${props => (props.borderRL || props.borderTB) && css` 
-    ${props.borderRL && css`
-      border-right: solid;
-      border-left: solid;
-    `}
-    ${props.borderTB && css`
-      border-top: solid;
-      border-bottom: solid;
-    `}
-    border-width: 1px;
-    border-color: rgb(56, 68, 77);
-  `}
-  
-  ${props => props.main && css`
-    width: 600px;
-    height: 100%;
-    margin: auto 20%;
-  `}
+const MainColumnContainer = styled.div`
+  width: 600px;
+  height: 100%;
+  margin: auto 20%;
+  border-right: ${borderStyle};
+  border-left: ${borderStyle};
 `;
 
 const Screen = styled.div`
@@ -88,7 +81,7 @@ class Tweet extends React.Component {
       id: "twitterID"
     }
     return (
-      <Container sideBySide borderTB padding="10px">
+      <TweetContainer>
         <Container margin="0 10px">
           <TweetIcon iconURL={data.icon} />
         </Container>
@@ -96,7 +89,7 @@ class Tweet extends React.Component {
           <TweetHeader name={data.name} id={data.id} />
           <TweetText text={data.text} />
         </Container>
-      </Container>
+      </TweetContainer >
     );
   }
 }
@@ -104,9 +97,9 @@ class Tweet extends React.Component {
 class MainColumn extends React.Component {
   render() {
     return (
-      <Container main borderRL>
+      <MainColumnContainer>
         <Tweet />
-      </Container>
+      </MainColumnContainer>
     )
   }
 }

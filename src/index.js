@@ -39,14 +39,13 @@ const TweetContainer = styled.div`
 const MainColumnContainer = styled.div`
   width: 600px;
   height: 100%;
+  min-height: 100vh;
   margin: auto 20%;
   border-right: ${borderStyle};
   border-left: ${borderStyle};
 `;
 
 const Screen = styled.div`
-  width: 100vw;
-  height: 100vh;
   background-color: rgb(21, 32, 43);
 `;
 

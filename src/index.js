@@ -41,10 +41,10 @@ const TweetContainer = styled.div`
 `;
 
 const MainColumnContainer = styled.div`
-  width: 600px;
+  max-width: 600px;
   height: 100%;
   min-height: 100vh;
-  margin: auto 20%;
+  margin: auto auto auto 15% ;
   border-right: ${borderStyle};
   border-left: ${borderStyle};
 `;

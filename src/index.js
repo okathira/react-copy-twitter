@@ -90,17 +90,22 @@ class MainColumnHeader extends React.Component {
 }
 
 class Tweet extends React.Component {
-  render() {
-    const data = this.props.tweetData;
+  data = {};
 
+  constructor(props) {
+    super(props);
+    this.data = this.props.tweetData;
+  }
+
+  render() {
     return (
       <TweetContainer>
         <Container margin="0 10px">
-          <TweetIcon iconURL={data.icon} />
+          <TweetIcon iconURL={this.data.icon} />
         </Container>
         <Container>
-          <TweetHeader name={data.name} id={data.id} />
-          <TweetText text={data.text} />
+          <TweetHeader name={this.data.name} id={this.data.id} />
+          <TweetText text={this.data.text} />
         </Container>
       </TweetContainer >
     );

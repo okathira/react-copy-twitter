@@ -108,7 +108,9 @@ class Tweet extends React.Component {
 }
 
 class TweetScroller extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+
     // dummy data
     const data = {
       text: "Hello, Twitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in cillum.",
@@ -116,14 +118,22 @@ class TweetScroller extends React.Component {
       name: "お名前",
       id: "twitterID"
     };
-    let timelineTweets = [];
-    for (let i = 0; i < 5; i++) {
-      timelineTweets.push(data);
-    }
 
+    this.state = {
+      timelineTweets: (() => {
+        let existTweets = [];
+        for (let i = 0; i < 5; i++)
+          existTweets.push(data);
+
+        return existTweets;
+      })(),
+    };
+  }
+
+  render() {
     return (
       <Container>
-        {timelineTweets.map((tweetData) => (
+        {this.state.timelineTweets.map((tweetData) => (
           <Tweet tweetData={tweetData} />
         ))}
       </Container>

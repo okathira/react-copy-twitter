@@ -11,6 +11,15 @@ const Text = styled.span`
   color: white;
 `;
 
+const InputTextarea = styled.textarea`
+  color: white;
+  background-color: #00000000;
+`;
+
+const Button = styled.button`
+  border-radius: 50%;
+`;
+
 const UserIcon = styled.img`
   border-radius: 50%;
   width: 49px;
@@ -91,6 +100,28 @@ function TweetHeader(props) {
   );
 }
 
+function TweetEditor(props) {
+  return (
+    <InputTextarea placeholder="いまどうしてる？"></InputTextarea>
+  );
+}
+
+function SubmitTweetButton(props) {
+  return (
+    <Button>
+      <span>Tweetする</span>
+    </Button>
+  )
+}
+
+function TweetOptions(props) {
+  return (
+    <Container>
+      <SubmitTweetButton />
+    </Container>
+  )
+}
+
 class MainColumnHeader extends React.Component {
   render() {
     return (
@@ -132,7 +163,8 @@ class DoTweetBox extends React.Component {
           <TweetIcon iconURL={dummyData.icon} />
         </Container>
         <Container>
-
+          <TweetEditor />
+          <TweetOptions />
         </Container>
       </DoTweetBoxContainer>
     )

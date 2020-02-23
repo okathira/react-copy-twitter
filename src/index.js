@@ -4,7 +4,7 @@ import styled, { createGlobalStyle, css } from 'styled-components';
 
 
 // style
-const borderStyle = "1px solid rgb(56, 68, 77)";
+const borderStyle = "solid rgb(56, 68, 77)";
 const backgroundColor = "rgb(21, 32, 43)";
 
 const Text = styled.span`
@@ -30,23 +30,27 @@ const MainColumnHeaderContainer = styled.div`
   top: 0px;
   padding: 15px;
   background-color: ${backgroundColor};
-  border-bottom: ${borderStyle};
+  border-bottom: 1px ${borderStyle};
 `;
 
 const TweetContainer = styled.div`
   padding: 10px;
   display: flex;
   align-items: stretch;
-  border-bottom: ${borderStyle};
+  border-bottom: 1px ${borderStyle};
 `;
+
+const DoTweetBoxContainer = styled(TweetContainer)`
+  border-bottom: 10px ${borderStyle};
+`
 
 const MainColumnContainer = styled.div`
   max-width: 600px;
   height: 100%;
   min-height: 100vh;
   margin: auto auto auto 15% ;
-  border-right: ${borderStyle};
-  border-left: ${borderStyle};
+  border-right: 1px ${borderStyle};
+  border-left: 1px ${borderStyle};
 `;
 
 const Screen = styled.div`
@@ -58,6 +62,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 // main
+// dummy data
+const dummyData = {
+  text: "Hello, Twitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in cillum.",
+  icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
+  name: "お名前",
+  id: "twitterID"
+};
+
 function TweetText(props) {
   return (
     <Text>{props.text}</Text>
@@ -112,23 +124,30 @@ class Tweet extends React.Component {
   }
 }
 
+class DoTweetBox extends React.Component {
+  render() {
+    return (
+      <DoTweetBoxContainer>
+        <Container margin="0 10px">
+          <TweetIcon iconURL={dummyData.icon} />
+        </Container>
+        <Container>
+
+        </Container>
+      </DoTweetBoxContainer>
+    )
+  }
+}
+
 class TweetScroller extends React.Component {
   constructor(props) {
     super(props);
-
-    // dummy data
-    const data = {
-      text: "Hello, Twitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in cillum.",
-      icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
-      name: "お名前",
-      id: "twitterID"
-    };
 
     this.state = {
       timelineTweets: (() => {
         let existTweets = [];
         for (let i = 0; i < 5; i++)
-          existTweets.push(data);
+          existTweets.push(dummyData);
 
         return existTweets;
       })(),
@@ -138,6 +157,7 @@ class TweetScroller extends React.Component {
   render() {
     return (
       <Container>
+        <DoTweetBox />
         {this.state.timelineTweets.map((tweetData) => (
           <Tweet tweetData={tweetData} />
         ))}

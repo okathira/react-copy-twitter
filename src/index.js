@@ -5,6 +5,7 @@ import styled, { createGlobalStyle, css } from 'styled-components';
 
 // style
 const borderStyle = "1px solid rgb(56, 68, 77)";
+const backgroundColor = "rgb(21, 32, 43)";
 
 const Text = styled.span`
   color: white;
@@ -25,7 +26,10 @@ const Container = styled.div`
 `;
 
 const MainColumnHeaderContainer = styled.div`
+  position: sticky;
+  top: 0px;
   padding: 15px;
+  background-color: ${backgroundColor};
   border-bottom: ${borderStyle};
 `;
 
@@ -46,7 +50,7 @@ const MainColumnContainer = styled.div`
 `;
 
 const Screen = styled.div`
-  background-color: rgb(21, 32, 43);
+  background-color: ${backgroundColor};
 `;
 
 const GlobalStyle = createGlobalStyle`

@@ -9,6 +9,7 @@ const backgroundColor = "rgb(21, 32, 43)";
 
 const Text = styled.span`
   color: white;
+  ${props => props.breaking && css`white-space: pre-wrap;`}
 `;
 
 const InputTextarea = styled.textarea`
@@ -81,7 +82,7 @@ const dummyData = {
 
 function TweetText(props) {
   return (
-    <Text>{props.text}</Text>
+    <Text breaking>{props.text}</Text>
   );
 }
 
@@ -102,7 +103,7 @@ function TweetHeader(props) {
 
 function TweetEditor(props) {
   return (
-    <InputTextarea placeholder="いまどうしてる？"></InputTextarea>
+    <InputTextarea placeholder="いまどうしてる？" onChange={props.onChange}></InputTextarea>
   );
 }
 
@@ -155,7 +156,7 @@ class DoTweetBox extends React.Component {
           <TweetIcon iconURL={dummyData.icon} />
         </Container>
         <Container>
-          <TweetEditor />
+          <TweetEditor onChange={this.props.changeEditText} />
           <Container>
             <SubmitTweetButton onClick={this.props.submitTweet} />
           </Container>
@@ -166,9 +167,12 @@ class DoTweetBox extends React.Component {
 }
 
 class TweetScroller extends React.Component {
+  editText = "";
+
   constructor(props) {
     super(props);
     this.submitTweet = this.submitTweet.bind(this);
+    this.changeEditText = this.changeEditText.bind(this);
 
     // タイムラインを読みこむ
     this.state = {
@@ -186,17 +190,23 @@ class TweetScroller extends React.Component {
     let timelineTweets = this.state.timelineTweets.slice();
 
     // ダミーツイート
-    timelineTweets.push(dummyData);
+    const tweet = Object.assign(Object.create(dummyData), dummyData);
+    tweet.text = this.editText;
+    timelineTweets.push(tweet);
 
     this.setState({
       timelineTweets: timelineTweets,
     });
   }
 
+  changeEditText(event) {
+    this.editText = event.target.value;
+  }
+
   render() {
     return (
       <Container>
-        <DoTweetBox submitTweet={this.submitTweet} />
+        <DoTweetBox submitTweet={this.submitTweet} changeEditText={this.changeEditText} />
         {this.state.timelineTweets.map((tweetData, key) => (
           <Tweet key={key} tweetData={tweetData} />
         ))}

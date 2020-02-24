@@ -108,17 +108,9 @@ function TweetEditor(props) {
 
 function SubmitTweetButton(props) {
   return (
-    <Button>
+    <Button onClick={props.onClick}>
       <span>Tweetする</span>
     </Button>
-  )
-}
-
-function TweetOptions(props) {
-  return (
-    <Container>
-      <SubmitTweetButton />
-    </Container>
   )
 }
 
@@ -164,7 +156,9 @@ class DoTweetBox extends React.Component {
         </Container>
         <Container>
           <TweetEditor />
-          <TweetOptions />
+          <Container>
+            <SubmitTweetButton onClick={this.props.submitTweet} />
+          </Container>
         </Container>
       </DoTweetBoxContainer>
     )
@@ -174,24 +168,37 @@ class DoTweetBox extends React.Component {
 class TweetScroller extends React.Component {
   constructor(props) {
     super(props);
+    this.submitTweet = this.submitTweet.bind(this);
 
+    // タイムラインを読みこむ
     this.state = {
       timelineTweets: (() => {
-        let existTweets = [];
-        for (let i = 0; i < 5; i++)
-          existTweets.push(dummyData);
+        let existingTweets = [];
+        for (let i = 0; i < 3; i++)
+          existingTweets.push(dummyData);
 
-        return existTweets;
+        return existingTweets;
       })(),
     };
+  }
+
+  submitTweet() {
+    let timelineTweets = this.state.timelineTweets.slice();
+
+    // ダミーツイート
+    timelineTweets.push(dummyData);
+
+    this.setState({
+      timelineTweets: timelineTweets,
+    });
   }
 
   render() {
     return (
       <Container>
-        <DoTweetBox />
-        {this.state.timelineTweets.map((tweetData) => (
-          <Tweet tweetData={tweetData} />
+        <DoTweetBox submitTweet={this.submitTweet} />
+        {this.state.timelineTweets.map((tweetData, key) => (
+          <Tweet key={key} tweetData={tweetData} />
         ))}
       </Container>
     );

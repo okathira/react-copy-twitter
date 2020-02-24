@@ -79,8 +79,9 @@ const GlobalStyle = createGlobalStyle`
 const dummyData = {
   text: "Hello, Twitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in cillum.",
   icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
-  name: "お名前",
-  id: "twitterID"
+  userName: "お名前",
+  screenName: "twitterID",
+  time: 0,
 };
 
 function TweetText(props) {
@@ -98,8 +99,8 @@ function TweetIcon(props) {
 function TweetHeader(props) {
   return (
     <Container>
-      <Text>{props.name}</Text>
-      <Text>@{props.id}</Text>
+      <Text>{props.userName}</Text>
+      <Text>@{props.screenName}</Text>
     </Container>
   );
 }
@@ -143,7 +144,7 @@ class Tweet extends React.Component {
           <TweetIcon iconURL={this.data.icon} />
         </Container>
         <Container>
-          <TweetHeader name={this.data.name} id={this.data.id} />
+          <TweetHeader userName={this.data.userName} screenName={this.data.screenName} />
           <TweetText text={this.data.text} />
         </Container>
       </TweetContainer >
@@ -181,9 +182,11 @@ class TweetScroller extends React.Component {
     this.state = {
       timelineTweets: (() => {
         let existingTweets = [];
-        for (let i = 0; i < 3; i++)
-          existingTweets.push(dummyData);
-
+        for (let i = 3; i > 0; i--) {
+          const data = Object.assign(Object.create(dummyData), dummyData);
+          data.time = i;
+          existingTweets.push(data);
+        }
         return existingTweets;
       })(),
     };
@@ -192,14 +195,17 @@ class TweetScroller extends React.Component {
   submitTweet() {
     let timelineTweets = this.state.timelineTweets.slice();
 
-    // ダミーツイート
+    // ダミーツイート 編集した内容のみ反映される
     const tweet = Object.assign(Object.create(dummyData), dummyData);
     tweet.text = this.editText;
-    timelineTweets.push(tweet);
+    tweet.time = Date.now();
+    timelineTweets.unshift(tweet);
 
     this.setState({
       timelineTweets: timelineTweets,
     });
+
+    console.log(this.state.timelineTweets)
   }
 
   changeEditText(event) {
@@ -210,8 +216,8 @@ class TweetScroller extends React.Component {
     return (
       <Container>
         <DoTweetBox submitTweet={this.submitTweet} changeEditText={this.changeEditText} />
-        {this.state.timelineTweets.map((tweetData, key) => (
-          <Tweet key={key} tweetData={tweetData} />
+        {this.state.timelineTweets.map((tweetData) => (
+          <Tweet key={tweetData.time} tweetData={tweetData} />
         ))}
       </Container>
     );

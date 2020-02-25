@@ -9,11 +9,12 @@ const backgroundColor = "rgb(21, 32, 43)";
 
 const Text = styled.span`
   color: white;
-  ${props => props.breaking && css`
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-  `}
 `;
+
+const BreakingText = styled(Text)`
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+`
 
 const InputTextarea = styled.textarea`
   color: white;
@@ -86,7 +87,7 @@ const dummyData = {
 
 function TweetText(props) {
   return (
-    <Text breaking>{props.text}</Text>
+    <BreakingText>{props.text}</BreakingText>
   );
 }
 

@@ -14,7 +14,7 @@ const Text = styled.span`
 const BreakingText = styled(Text)`
   white-space: pre-wrap;
   overflow-wrap: break-word;
-`
+`;
 
 const InputTextarea = styled.textarea`
   color: white;
@@ -56,7 +56,7 @@ const TweetContainer = styled.div`
 
 const DoTweetBoxContainer = styled(TweetContainer)`
   border-bottom: 10px ${borderStyle};
-`
+`;
 
 const MainColumnContainer = styled.div`
   max-width: 600px;
@@ -117,7 +117,7 @@ function SubmitTweetButton(props) {
     <Button onClick={props.onClick}>
       <span>Tweetする</span>
     </Button>
-  )
+  );
 }
 
 class MainColumnHeader extends React.Component {
@@ -167,7 +167,7 @@ class DoTweetBox extends React.Component {
           </Container>
         </Container>
       </DoTweetBoxContainer>
-    )
+    );
   }
 }
 
@@ -206,7 +206,7 @@ class TweetScroller extends React.Component {
       timelineTweets: timelineTweets,
     });
 
-    console.log(this.state.timelineTweets)
+    console.log(this.state.timelineTweets);
   }
 
   changeEditText(event) {

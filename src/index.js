@@ -9,11 +9,11 @@ const backgroundColor = "rgb(21, 32, 43)";
 
 const Text = styled.span`
   color: white;
+  overflow-wrap: anywhere;
 `;
 
 const BreakingText = styled(Text)`
   white-space: pre-wrap;
-  overflow-wrap: break-word;
 `;
 
 const InputTextarea = styled.textarea`
@@ -78,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
 // main
 // dummy data
 const dummyData = {
-  text: "Hello, Twitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in cillum.",
+  text: "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHello,Twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
   icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
   userName: "お名前",
   screenName: "twitterID",

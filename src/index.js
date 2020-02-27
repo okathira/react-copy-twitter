@@ -194,16 +194,18 @@ class TweetScroller extends React.Component {
   }
 
   submitTweet() {
-    let timelineTweets = this.state.timelineTweets.slice();
-
-    // ダミーツイート 編集した内容のみ反映される
-    const tweet = Object.assign(Object.create(dummyData), dummyData);
-    tweet.text = this.editText;
-    tweet.time = Date.now();
-    timelineTweets.unshift(tweet);
+    // ツイート内容のみ反映したダミーデータ
+    const tweet = {
+      ...dummyData,
+      text: this.editText,
+      time: Date.now()
+    };
 
     this.setState({
-      timelineTweets: timelineTweets,
+      timelineTweets: [
+        tweet,
+        ...this.state.timelineTweets
+      ]
     });
 
     console.log(this.state.timelineTweets);

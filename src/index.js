@@ -93,7 +93,7 @@ function TweetText(props) {
 
 function TweetIcon(props) {
   return (
-    <UserIcon src={props.iconURL} alt="user-icon"></UserIcon>
+    <UserIcon src={props.iconURL} alt="user-icon" />
   );
 }
 
@@ -108,7 +108,7 @@ function TweetHeader(props) {
 
 function TweetEditor(props) {
   return (
-    <InputTextarea placeholder="いまどうしてる？" onChange={props.onChange}></InputTextarea>
+    <InputTextarea placeholder="いまどうしてる？" onChange={props.onChange} />
   );
 }
 

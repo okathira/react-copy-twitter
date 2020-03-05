@@ -184,9 +184,15 @@ class TweetScroller extends React.Component {
       timelineTweets: (() => {
         let existingTweets = [];
         for (let i = 0; i < 3; i++) {
-          const data = Object.assign(Object.create(dummyData), dummyData);
-          data.time = i;
-          existingTweets.unshift(data);
+          const tweet = {
+            ...dummyData,
+            time: i
+          };
+
+          existingTweets = [
+            tweet,
+            ...existingTweets
+          ];
         }
         return existingTweets;
       })(),

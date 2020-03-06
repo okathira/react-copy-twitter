@@ -4,10 +4,25 @@ import styled, { createGlobalStyle, css } from 'styled-components';
 
 
 // style
-const borderStyle = "1px solid rgb(56, 68, 77)";
+const borderStyle = "solid rgb(56, 68, 77)";
+const backgroundColor = "rgb(21, 32, 43)";
 
 const Text = styled.span`
   color: white;
+  overflow-wrap: anywhere;
+`;
+
+const BreakingText = styled(Text)`
+  white-space: pre-wrap;
+`;
+
+const InputTextarea = styled.textarea`
+  color: white;
+  background-color: #00000000;
+`;
+
+const Button = styled.button`
+  border-radius: 50%;
 `;
 
 const UserIcon = styled.img`
@@ -25,29 +40,35 @@ const Container = styled.div`
 `;
 
 const MainColumnHeaderContainer = styled.div`
+  position: sticky;
+  top: 0px;
   padding: 15px;
-  border-bottom: ${borderStyle};
+  background-color: ${backgroundColor};
+  border-bottom: 1px ${borderStyle};
 `;
 
 const TweetContainer = styled.div`
   padding: 10px;
   display: flex;
   align-items: stretch;
-  border-bottom: ${borderStyle};
+  border-bottom: 1px ${borderStyle};
+`;
+
+const DoTweetBoxContainer = styled(TweetContainer)`
+  border-bottom: 10px ${borderStyle};
 `;
 
 const MainColumnContainer = styled.div`
-  width: 600px;
+  max-width: 600px;
   height: 100%;
-  margin: auto 20%;
-  border-right: ${borderStyle};
-  border-left: ${borderStyle};
+  min-height: 100vh;
+  margin: auto auto auto 15% ;
+  border-right: 1px ${borderStyle};
+  border-left: 1px ${borderStyle};
 `;
 
 const Screen = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgb(21, 32, 43);
+  background-color: ${backgroundColor};
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -55,24 +76,47 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 // main
+// dummy data
+const dummyData = {
+  text: "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHello,Twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+  icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
+  userName: "お名前",
+  screenName: "twitterID",
+  time: 0,
+};
+
 function TweetText(props) {
   return (
-    <Text>{props.text}</Text>
+    <BreakingText>{props.text}</BreakingText>
   );
 }
 
 function TweetIcon(props) {
   return (
-    <UserIcon src={props.iconURL} alt="user-icon"></UserIcon>
+    <UserIcon src={props.iconURL} alt="user-icon" />
   );
 }
 
 function TweetHeader(props) {
   return (
     <Container>
-      <Text>{props.name}</Text>
-      <Text>@{props.id}</Text>
+      <Text>{props.userName}</Text>
+      <Text>@{props.screenName}</Text>
     </Container>
+  );
+}
+
+function TweetEditor(props) {
+  return (
+    <InputTextarea placeholder="いまどうしてる？" onChange={props.onChange} />
+  );
+}
+
+function SubmitTweetButton(props) {
+  return (
+    <Button onClick={props.onClick}>
+      <span>Tweetする</span>
+    </Button>
   );
 }
 
@@ -87,33 +131,103 @@ class MainColumnHeader extends React.Component {
 }
 
 class Tweet extends React.Component {
+  data = {};
+
+  constructor(props) {
+    super(props);
+    this.data = this.props.tweetData;
+  }
+
   render() {
-    const data = {
-      text: "Hello, Twitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in cillum.",
-      icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
-      name: "お名前",
-      id: "twitterID"
-    };
     return (
       <TweetContainer>
         <Container margin="0 10px">
-          <TweetIcon iconURL={data.icon} />
+          <TweetIcon iconURL={this.data.icon} />
         </Container>
         <Container>
-          <TweetHeader name={data.name} id={data.id} />
-          <TweetText text={data.text} />
+          <TweetHeader userName={this.data.userName} screenName={this.data.screenName} />
+          <TweetText text={this.data.text} />
         </Container>
       </TweetContainer >
     );
   }
 }
 
-class TweetScroller extends React.Component {
+class DoTweetBox extends React.Component {
   render() {
-    return(
+    return (
+      <DoTweetBoxContainer>
+        <Container margin="0 10px">
+          <TweetIcon iconURL={dummyData.icon} />
+        </Container>
+        <Container>
+          <TweetEditor onChange={this.props.changeEditText} />
+          <Container>
+            <SubmitTweetButton onClick={this.props.submitTweet} />
+          </Container>
+        </Container>
+      </DoTweetBoxContainer>
+    );
+  }
+}
+
+class TweetScroller extends React.Component {
+  editText = "";
+
+  constructor(props) {
+    super(props);
+    this.submitTweet = this.submitTweet.bind(this);
+    this.changeEditText = this.changeEditText.bind(this);
+
+    // タイムラインを読みこむ
+    this.state = {
+      timelineTweets: (() => {
+        let existingTweets = [];
+        for (let i = 0; i < 3; i++) {
+          const tweet = {
+            ...dummyData,
+            time: i
+          };
+
+          existingTweets = [
+            tweet,
+            ...existingTweets
+          ];
+        }
+        return existingTweets;
+      })(),
+    };
+  }
+
+  submitTweet() {
+    // ツイート内容のみ反映したダミーデータ
+    const tweet = {
+      ...dummyData,
+      text: this.editText,
+      time: Date.now()
+    };
+
+    this.setState({
+      timelineTweets: [
+        tweet,
+        ...this.state.timelineTweets
+      ]
+    });
+
+    console.log(this.state.timelineTweets);
+  }
+
+  changeEditText(event) {
+    this.editText = event.target.value;
+  }
+
+  render() {
+    return (
       <Container>
-        <Tweet />
-        <Tweet />
+        <DoTweetBox submitTweet={this.submitTweet} changeEditText={this.changeEditText} />
+        {this.state.timelineTweets.map((tweetData) => (
+          <Tweet key={tweetData.time} tweetData={tweetData} />
+        ))}
       </Container>
     );
   }

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { borderStyle } from './themeStyles';
 
-
-const borderStyle = "solid rgb(56, 68, 77)";
 
 const Text = styled.span`
   color: white;

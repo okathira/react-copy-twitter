@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import TweetScroller from './TweetScroller';
+import { borderStyle, backgroundColor } from './themeStyles';
 
-
-const borderStyle = "solid rgb(56, 68, 77)";
-const backgroundColor = "rgb(21, 32, 43)";
 
 const Text = styled.span`
   color: white;

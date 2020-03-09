@@ -1,9 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import dummyData from './dummyTweetData';
+import { borderStyle } from './themeStyles';
 
-
-const borderStyle = "solid rgb(56, 68, 77)";
 
 const InputTextarea = styled.textarea`
   color: white;

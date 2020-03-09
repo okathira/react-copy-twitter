@@ -1,9 +1,8 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import MainColumn from './MainColumn';
+import { backgroundColor } from './themeStyles';
 
-
-const backgroundColor = "rgb(21, 32, 43)";
 
 const Screen = styled.div`
   background-color: ${backgroundColor};

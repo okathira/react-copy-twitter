@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import dummyData from './dummyTweetData';
 
 
 const borderStyle = "solid rgb(56, 68, 77)";
@@ -38,14 +39,6 @@ const DoTweetBoxContainer = styled(TweetContainer)`
   border-bottom: 10px ${borderStyle};
 `;
 
-
-const dummyData = {
-  text: "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHello,Twwwwwwwwwwwwwwwwwwwwwwwwwwwwwwitter. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
-  icon: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png",
-  userName: "お名前",
-  screenName: "twitterID",
-  time: 0,
-};
 
 function TweetIcon(props) {
   return (

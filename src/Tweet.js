@@ -25,27 +25,6 @@ const TweetContainer = styled.div`
 `;
 
 
-function TweetText(props) {
-  return (
-    <BreakingText>{props.text}</BreakingText>
-  );
-}
-
-function TweetIcon(props) {
-  return (
-    <UserIcon src={props.iconURL} alt="user-icon" />
-  );
-}
-
-function TweetHeader(props) {
-  return (
-    <Container>
-      <Text>{props.userName}</Text>
-      <Text>@{props.screenName}</Text>
-    </Container>
-  );
-}
-
 export default class Tweet extends React.Component {
   data = {};
 
@@ -58,11 +37,14 @@ export default class Tweet extends React.Component {
     return (
       <TweetContainer>
         <Container margin="0 10px">
-          <TweetIcon iconURL={this.data.icon} />
+          <UserIcon src={this.data.icon} alt="user-icon" />
         </Container>
         <Container>
-          <TweetHeader userName={this.data.userName} screenName={this.data.screenName} />
-          <TweetText text={this.data.text} />
+          <Container>
+            <Text>{this.data.userName}</Text>
+            <Text>@{this.data.screenName}</Text>
+          </Container>
+          <BreakingText>{this.data.text}</BreakingText>
         </Container>
       </TweetContainer >
     );

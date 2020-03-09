@@ -26,37 +26,19 @@ const DoTweetBoxContainer = styled(TweetContainer)`
 `;
 
 
-function TweetIcon(props) {
-  return (
-    <UserIcon src={props.iconURL} alt="user-icon" />
-  );
-}
-
-function TweetEditor(props) {
-  return (
-    <InputTextarea placeholder="いまどうしてる？" onChange={props.onChange} />
-  );
-}
-
-function SubmitTweetButton(props) {
-  return (
-    <Button onClick={props.onClick}>
-      <span>Tweetする</span>
-    </Button>
-  );
-}
-
 export default class DoTweetBox extends React.Component {
   render() {
     return (
       <DoTweetBoxContainer>
         <Container margin="0 10px">
-          <TweetIcon iconURL={dummyData.icon} />
+          <UserIcon src={dummyData.icon} alt="user-icon" />
         </Container>
         <Container>
-          <TweetEditor onChange={this.props.changeEditText} />
+          <InputTextarea placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
           <Container>
-            <SubmitTweetButton onClick={this.props.submitTweet} />
+            <Button onClick={this.props.submitTweet}>
+              <span>Tweetする</span>
+            </Button>
           </Container>
         </Container>
       </DoTweetBoxContainer>

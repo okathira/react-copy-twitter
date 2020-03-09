@@ -1,20 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { borderStyle } from './themeStyles';
+import { UserIcon, Text } from './uiElements';
 
-
-const Text = styled.span`
-  color: white;
-  overflow-wrap: anywhere;
-`;
 
 const BreakingText = styled(Text)`
   white-space: pre-wrap;
-`;
-
-const UserIcon = styled.img`
-  border-radius: 50%;
-  width: 49px;
 `;
 
 const Container = styled.div`

@@ -2,21 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import dummyData from './dummyTweetData';
 import { borderStyle } from './themeStyles';
+import { InputTextarea, Button, UserIcon } from './uiElements';
 
-
-const InputTextarea = styled.textarea`
-  color: white;
-  background-color: #00000000;
-`;
-
-const Button = styled.button`
-  border-radius: 50%;
-`;
-
-const UserIcon = styled.img`
-  border-radius: 50%;
-  width: 49px;
-`;
 
 const Container = styled.div`
   ${props => props.margin && css`

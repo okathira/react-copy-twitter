@@ -2,12 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import TweetScroller from './TweetScroller';
 import { borderStyle, backgroundColor } from './themeStyles';
+import { Text } from './uiElements';
 
-
-const Text = styled.span`
-  color: white;
-  overflow-wrap: anywhere;
-`;
 
 const MainColumnHeaderContainer = styled.div`
   position: sticky;

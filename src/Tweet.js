@@ -32,7 +32,7 @@ export default class Tweet extends React.Component {
         </Container>
         <Container>
           <Container>
-            <Text>{this.data.userName}</Text>
+            <Text weight="bold">{this.data.userName}</Text>
             <Text>@{this.data.screenName}</Text>
           </Container>
           <BreakingText>{this.data.text}</BreakingText>

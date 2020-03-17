@@ -21,6 +21,13 @@ const UserIcon = styled.img`
 const Text = styled.span`
   color: white;
   overflow-wrap: anywhere;
+  font-family: Arial;
+  ${props => props.weight && css`
+    font-weight: ${props.weight};
+  `}
+  ${props => props.size && css`
+    font-size: ${props.size};
+  `}
 `;
 
 const Container = styled.div`

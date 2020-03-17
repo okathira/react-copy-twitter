@@ -8,7 +8,7 @@ import { Text } from './uiElements';
 const MainColumnHeaderContainer = styled.div`
   position: sticky;
   top: 0px;
-  padding: 15px;
+  padding: 10px 15px;
   background-color: ${backgroundColor};
   border-bottom: 1px ${borderStyle};
 `;
@@ -28,7 +28,7 @@ export default class MainColumn extends React.Component {
     return (
       <MainColumnContainer>
         <MainColumnHeaderContainer>
-          <Text>ホーム</Text>
+          <Text weight="bold" size="19px">ホーム</Text>
         </MainColumnHeaderContainer>
         <TweetScroller />
       </MainColumnContainer>

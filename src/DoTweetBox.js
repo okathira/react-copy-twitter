@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import dummyData from './dummyTweetData';
 import { borderStyle } from './themeStyles';
-import { InputTextarea, Button, UserIcon, Container } from './uiElements';
+import { InputTextarea, Button, UserIcon, Text, Container } from './uiElements';
 
 
 const TweetContainer = styled.div`
@@ -28,7 +28,7 @@ export default class DoTweetBox extends React.Component {
           <InputTextarea placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
           <Container>
             <Button onClick={this.props.submitTweet}>
-              <span>Tweetする</span>
+              <Text weight="bold" >Tweetする</Text>
             </Button>
           </Container>
         </Container>

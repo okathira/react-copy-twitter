@@ -1,18 +1,9 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import dummyData from './dummyTweetData';
 import { borderStyle } from './themeStyles';
-import { InputTextarea, Button, UserIcon } from './uiElements';
+import { InputTextarea, Button, UserIcon, Container } from './uiElements';
 
-
-const Container = styled.div`
-  ${props => props.margin && css`
-    margin: ${props.margin};
-  `}
-  ${props => props.padding && css`
-    padding: ${props.padding};
-  `}
-`;
 
 const TweetContainer = styled.div`
   padding: 10px;

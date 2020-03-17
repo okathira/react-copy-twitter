@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 const InputTextarea = styled.textarea`
@@ -20,5 +20,13 @@ const Text = styled.span`
   overflow-wrap: anywhere;
 `;
 
+const Container = styled.div`
+  ${props => props.margin && css`
+    margin: ${props.margin};
+  `}
+  ${props => props.padding && css`
+    padding: ${props.padding};
+  `}
+`;
 
-export { InputTextarea, Button, UserIcon, Text };
+export { InputTextarea, Button, UserIcon, Text, Container };

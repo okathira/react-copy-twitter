@@ -6,8 +6,11 @@ const InputTextarea = styled.textarea`
   background-color: #00000000;
 `;
 
-const Button = styled.button`
-  border-radius: 50%;
+const Button = styled.div.attrs({ role: "button" })`
+  border-radius: 9999px;
+  display: inline-block;
+  background-color: rgb(29, 161, 242);
+  padding: 5px 15px;
 `;
 
 const UserIcon = styled.img`

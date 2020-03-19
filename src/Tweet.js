@@ -13,6 +13,10 @@ const TweetContainer = styled(ContentContainer)`
   :hover {
     background-color: #192734;
   }
+
+  :focus-visible {
+    box-shadow: 0 0 0 1px #9CDCFE;
+  }
 `;
 
 
@@ -26,7 +30,7 @@ export default class Tweet extends React.Component {
 
   render() {
     return (
-      <TweetContainer>
+      <TweetContainer tabIndex="0">
         <Container margin="0 10px">
           <UserIcon src={this.data.icon} alt="user-icon" />
         </Container>
@@ -35,7 +39,9 @@ export default class Tweet extends React.Component {
             <Text weight="bold">{this.data.userName}</Text>
             <Text>@{this.data.screenName}</Text>
           </Container>
-          <BreakingText>{this.data.text}</BreakingText>
+          <Container margin="2px auto">
+            <BreakingText>{this.data.text}</BreakingText>
+          </Container>
         </Container>
       </TweetContainer >
     );

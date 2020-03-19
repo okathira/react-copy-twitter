@@ -17,11 +17,13 @@ export default class DoTweetBox extends React.Component {
         <Container margin="0 10px">
           <UserIcon src={dummyData.icon} alt="user-icon" />
         </Container>
-        <Container>
-          <InputTextarea placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
+        <Container maxWidth>
+          <Container margin="1em 0">
+            <InputTextarea size="1.4em" placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
+          </Container>
           <Container>
             <Button onClick={this.props.submitTweet}>
-              <Text weight="bold" >Tweetする</Text>
+              <Text size="15px" weight="bold" >Tweetする</Text>
             </Button>
           </Container>
         </Container>

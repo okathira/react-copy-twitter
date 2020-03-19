@@ -1,10 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { UserIcon, Text, Container, TweetContainer } from './uiElements';
+import { UserIcon, Text, Container, TweetContainer as DefaultTweetContainer } from './uiElements';
 
 
 const BreakingText = styled(Text)`
   white-space: pre-wrap;
+`;
+
+const TweetContainer = styled(DefaultTweetContainer)`
+  transition-duration: 0.3s;
+
+  :hover {
+    background-color: #192734;
+  }
 `;
 
 

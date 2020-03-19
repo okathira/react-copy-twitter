@@ -45,11 +45,6 @@ const TweetContainer = styled.div`
   display: flex;
   align-items: stretch;
   border-bottom: 1px ${borderStyle};
-  transition-duration: 0.3s;
-
-  :hover {
-    background-color: #192734;
-  }
 `;
 
 const Container = styled.div`

@@ -40,7 +40,7 @@ const Text = styled.span`
   `}
 `;
 
-const TweetContainer = styled.div`
+const ContentContainer = styled.div`
   padding: 10px;
   display: flex;
   align-items: stretch;
@@ -56,4 +56,4 @@ const Container = styled.div`
   `}
 `;
 
-export { InputTextarea, Button, UserIcon, Text, Container, TweetContainer };
+export { InputTextarea, Button, UserIcon, Text, Container, ContentContainer };

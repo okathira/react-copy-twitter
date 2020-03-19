@@ -1,18 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { borderStyle } from './themeStyles';
-import { UserIcon, Text, Container } from './uiElements';
+import { UserIcon, Text, Container, TweetContainer } from './uiElements';
 
 
 const BreakingText = styled(Text)`
   white-space: pre-wrap;
-`;
-
-const TweetContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  align-items: stretch;
-  border-bottom: 1px ${borderStyle};
 `;
 
 

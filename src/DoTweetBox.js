@@ -2,15 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import dummyData from './dummyTweetData';
 import { borderStyle } from './themeStyles';
-import { InputTextarea, Button, UserIcon, Text, Container } from './uiElements';
+import { InputTextarea, Button, UserIcon, Text, Container, TweetContainer } from './uiElements';
 
-
-const TweetContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  align-items: stretch;
-  border-bottom: 1px ${borderStyle};
-`;
 
 const DoTweetBoxContainer = styled(TweetContainer)`
   border-bottom: 10px ${borderStyle};

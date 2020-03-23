@@ -1,18 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 import DoTweetBox from './DoTweetBox';
 import Tweet from './Tweet';
 import dummyData from './dummyTweetData';
-
-
-const Container = styled.div`
-  ${props => props.margin && css`
-    margin: ${props.margin};
-  `}
-  ${props => props.padding && css`
-    padding: ${props.padding};
-  `}
-`;
+import { Container } from './uiElements';
 
 
 export default class TweetScroller extends React.Component {

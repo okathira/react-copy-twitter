@@ -1,27 +1,11 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import dummyData from './dummyTweetData';
 import { borderStyle } from './themeStyles';
-import { InputTextarea, Button, UserIcon } from './uiElements';
+import { InputTextarea, Button, UserIcon, Text, Container, ContentContainer } from './uiElements';
 
 
-const Container = styled.div`
-  ${props => props.margin && css`
-    margin: ${props.margin};
-  `}
-  ${props => props.padding && css`
-    padding: ${props.padding};
-  `}
-`;
-
-const TweetContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  align-items: stretch;
-  border-bottom: 1px ${borderStyle};
-`;
-
-const DoTweetBoxContainer = styled(TweetContainer)`
+const DoTweetBoxContainer = styled(ContentContainer)`
   border-bottom: 10px ${borderStyle};
 `;
 
@@ -33,11 +17,13 @@ export default class DoTweetBox extends React.Component {
         <Container margin="0 10px">
           <UserIcon src={dummyData.icon} alt="user-icon" />
         </Container>
-        <Container>
-          <InputTextarea placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
+        <Container maxWidth>
+          <Container margin="1em 0">
+            <InputTextarea size="1.4em" placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
+          </Container>
           <Container>
             <Button onClick={this.props.submitTweet}>
-              <span>Tweetする</span>
+              <Text size="15px" weight="bold" >Tweetする</Text>
             </Button>
           </Container>
         </Container>

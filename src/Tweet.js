@@ -1,27 +1,22 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { borderStyle } from './themeStyles';
-import { UserIcon, Text } from './uiElements';
+import styled from 'styled-components';
+import { UserIcon, Text, Container, ContentContainer } from './uiElements';
 
 
 const BreakingText = styled(Text)`
   white-space: pre-wrap;
 `;
 
-const Container = styled.div`
-  ${props => props.margin && css`
-    margin: ${props.margin};
-  `}
-  ${props => props.padding && css`
-    padding: ${props.padding};
-  `}
-`;
+const TweetContainer = styled(ContentContainer)`
+  transition-duration: 0.3s;
 
-const TweetContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  align-items: stretch;
-  border-bottom: 1px ${borderStyle};
+  :hover {
+    background-color: #192734;
+  }
+
+  :focus-visible {
+    box-shadow: 0 0 0 1px #9CDCFE;
+  }
 `;
 
 
@@ -35,16 +30,18 @@ export default class Tweet extends React.Component {
 
   render() {
     return (
-      <TweetContainer>
+      <TweetContainer tabIndex="0">
         <Container margin="0 10px">
           <UserIcon src={this.data.icon} alt="user-icon" />
         </Container>
         <Container>
           <Container>
-            <Text>{this.data.userName}</Text>
+            <Text weight="bold">{this.data.userName}</Text>
             <Text>@{this.data.screenName}</Text>
           </Container>
-          <BreakingText>{this.data.text}</BreakingText>
+          <Container margin="2px auto">
+            <BreakingText>{this.data.text}</BreakingText>
+          </Container>
         </Container>
       </TweetContainer >
     );

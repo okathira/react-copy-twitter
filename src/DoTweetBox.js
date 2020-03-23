@@ -11,8 +11,8 @@ const DoTweetBoxContainer = styled(ContentContainer)`
 
 
 export default class DoTweetBox extends React.Component {
-  onChange = event => {
-    this.props.changeEditText(event);
+  textareaOnChange = event => {
+    this.props.setEditText(event);
 
     event.target.style.height = "inherit";
     event.target.style.height = `${event.target.scrollHeight}px`;
@@ -29,7 +29,7 @@ export default class DoTweetBox extends React.Component {
             <InputTextarea
               size="1.4em"
               placeholder="いまどうしてる？"
-              onChange={this.onChange}
+              onChange={this.textareaOnChange}
               rows="1"
             />
           </Container>

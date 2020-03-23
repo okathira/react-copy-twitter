@@ -11,7 +11,7 @@ export default class TweetScroller extends React.Component {
   constructor(props) {
     super(props);
     this.submitTweet = this.submitTweet.bind(this);
-    this.changeEditText = this.changeEditText.bind(this);
+    this.setEditText = this.setEditText.bind(this);
 
     // タイムラインを読みこむ
     this.state = {
@@ -51,14 +51,14 @@ export default class TweetScroller extends React.Component {
     console.log(this.state.timelineTweets);
   }
 
-  changeEditText(event) {
+  setEditText(event) {
     this.editText = event.target.value;
   }
 
   render() {
     return (
       <Container>
-        <DoTweetBox submitTweet={this.submitTweet} changeEditText={this.changeEditText} />
+        <DoTweetBox submitTweet={this.submitTweet} setEditText={this.setEditText} />
         {this.state.timelineTweets.map((tweetData) => (
           <Tweet key={tweetData.time} tweetData={tweetData} />
         ))}

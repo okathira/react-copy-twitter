@@ -10,6 +10,7 @@ const InputTextarea = styled.textarea`
   width: 100%;
   border: none;
   outline: none;
+  overflow: hidden;
 
   ${props => props.size && css`
     font-size: ${props.size};

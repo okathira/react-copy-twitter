@@ -11,6 +11,13 @@ const DoTweetBoxContainer = styled(ContentContainer)`
 
 
 export default class DoTweetBox extends React.Component {
+  onChange = event => {
+    this.props.changeEditText(event);
+
+    event.target.style.height = "inherit";
+    event.target.style.height = `${event.target.scrollHeight}px`;
+  }
+
   render() {
     return (
       <DoTweetBoxContainer>
@@ -19,7 +26,12 @@ export default class DoTweetBox extends React.Component {
         </Container>
         <Container maxWidth>
           <Container margin="1em 0">
-            <InputTextarea size="1.4em" placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
+            <InputTextarea
+              size="1.4em"
+              placeholder="いまどうしてる？"
+              onChange={this.onChange}
+              rows="1"
+            />
           </Container>
           <Container>
             <Button onClick={this.props.submitTweet}>

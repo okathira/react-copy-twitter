@@ -11,12 +11,21 @@ const DoTweetBoxContainer = styled(ContentContainer)`
 
 
 export default class DoTweetBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { tweet: "" };
+  }
+
   textareaOnChange = event => {
-    this.props.setEditText(event);
+    this.setState({ tweet: event.target.value });
 
     event.target.style.height = "inherit";
     event.target.style.height = `${event.target.scrollHeight}px`;
-  }
+  };
+
+  tweetButtonOnClick = () => {
+    this.props.submitTweet(this.state.tweet);
+  };
 
   render() {
     return (
@@ -31,10 +40,11 @@ export default class DoTweetBox extends React.Component {
               placeholder="いまどうしてる？"
               onChange={this.textareaOnChange}
               rows="1"
+              value={this.state.tweet}
             />
           </Container>
           <Container>
-            <Button onClick={this.props.submitTweet}>
+            <Button onClick={this.tweetButtonOnClick}>
               <Text size="15px" weight="bold" >Tweetする</Text>
             </Button>
           </Container>

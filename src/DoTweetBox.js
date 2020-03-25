@@ -15,24 +15,29 @@ export default class DoTweetBox extends React.Component {
     super(props);
     this.state = {
       tweet: "",
-      height: "inherit"
+      height: "inherit",
+      count: 1,
     };
   }
 
   textareaOnChange = event => {
+    const t = event.target;
+    const tweet = t.value
+    const count = (tweet.match(/\r\n|\n/g) || []).length + 1;
+    const height = count > this.state.count ? t.scrollHeight : t.scrollHeight / this.state.count * count
     this.setState({
-      tweet: event.target.value,
-      height: `${event.target.scrollHeight}px`
+      tweet,
+      count,
+      height: `${height}px`,
     });
-    event.target.style.height = "inherit";
-    event.target.style.height = `${event.target.scrollHeight}px`;
   };
 
   tweetButtonOnClick = () => {
     this.props.submitTweet(this.state.tweet);
     this.setState({
       tweet: "",
-      height: "inherit"
+      height: "inherit",
+      count: 1,
     });
   };
 

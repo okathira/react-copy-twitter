@@ -17,19 +17,44 @@ export default class DoTweetBox extends React.Component {
       tweet: "",
       height: "inherit",
       count: 1,
+      wrapCount: 0,
     };
   }
 
   textareaOnChange = event => {
     const t = event.target;
-    const tweet = t.value
+    const tweet = t.value;
     const count = (tweet.match(/\r\n|\n/g) || []).length + 1;
-    const height = count > this.state.count ? t.scrollHeight : t.scrollHeight / this.state.count * count
+    const charHeight = 20; // t.scrollHeight / (this.state.count + this.state.wrapCount);
+
+    const height =
+      count > this.state.count
+        ? t.scrollHeight
+        : charHeight * count;
+
+    const wrapCountIncrement = (() => {
+      if (count === this.state.count) {
+        // if (t.scrollHeight - t.clientHeight === 1) {
+        //   this.setState({ height: `${t.scrollHeight}px` });
+        //   return 0;
+        // }
+        // else
+        return (t.scrollHeight - t.clientHeight) / charHeight;
+      }
+      else
+        return 0;
+    })();
+
+    const wrapCount = this.state.wrapCount + wrapCountIncrement;
+
     this.setState({
       tweet,
       count,
-      height: `${height}px`,
+      wrapCount,
+      height: `${height}px`
     });
+
+    console.log(t.scrollHeight, t.clientHeight, count, wrapCount, wrapCountIncrement, charHeight);
   };
 
   tweetButtonOnClick = () => {
@@ -38,6 +63,7 @@ export default class DoTweetBox extends React.Component {
       tweet: "",
       height: "inherit",
       count: 1,
+      wrapCount: 0,
     });
   };
 
@@ -50,8 +76,8 @@ export default class DoTweetBox extends React.Component {
         <Container maxWidth>
           <Container margin="1em 0">
             <InputTextarea
-              size="1.4em"
-              placeholder="いまどうしてる？"
+              size="20px"
+              // placeholder="いまどうしてる？"
               onChange={this.textareaOnChange}
               rows="1"
               value={this.state.tweet}

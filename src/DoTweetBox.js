@@ -27,25 +27,9 @@ export default class DoTweetBox extends React.Component {
     const count = (tweet.match(/\r\n|\n/g) || []).length + 1;
     const charHeight = 20; // t.scrollHeight / (this.state.count + this.state.wrapCount);
 
-    const height =
-      count > this.state.count
-        ? t.scrollHeight
-        : charHeight * count;
+    const wrapCount = Math.floor((t.scrollHeight - count * charHeight) / charHeight);
 
-    const wrapCountIncrement = (() => {
-      if (count === this.state.count) {
-        // if (t.scrollHeight - t.clientHeight === 1) {
-        //   this.setState({ height: `${t.scrollHeight}px` });
-        //   return 0;
-        // }
-        // else
-        return (t.scrollHeight - t.clientHeight) / charHeight;
-      }
-      else
-        return 0;
-    })();
-
-    const wrapCount = this.state.wrapCount + wrapCountIncrement;
+    const height = charHeight * (count + wrapCount) + 1;
 
     this.setState({
       tweet,
@@ -54,7 +38,7 @@ export default class DoTweetBox extends React.Component {
       height: `${height}px`
     });
 
-    console.log(t.scrollHeight, t.clientHeight, count, wrapCount, wrapCountIncrement, charHeight);
+    console.log(t.scrollHeight, t.clientHeight, count, wrapCount);
   };
 
   tweetButtonOnClick = () => {
@@ -77,7 +61,7 @@ export default class DoTweetBox extends React.Component {
           <Container margin="1em 0">
             <InputTextarea
               size="20px"
-              // placeholder="いまどうしてる？"
+              placeholder="いまどうしてる？"
               onChange={this.textareaOnChange}
               rows="1"
               value={this.state.tweet}

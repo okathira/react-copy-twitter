@@ -42,9 +42,7 @@ export default class TweetScroller extends React.Component {
         tweet,
         ...this.state.timelineTweets
       ]
-    });
-
-    console.log(this.state.timelineTweets);
+    }, () => console.log(this.state.timelineTweets));
   }
 
   render() {

@@ -35,7 +35,7 @@ export default class DoTweetBox extends React.Component {
       tweet,
       count,
       wrapCount,
-      height: `${height}px`
+      height: `${height}px`,
     });
 
     console.log(t.scrollHeight, t.clientHeight, count, wrapCount);

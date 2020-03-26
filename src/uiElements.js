@@ -11,6 +11,7 @@ const InputTextarea = styled.textarea`
   border: none;
   outline: none;
   overflow: hidden;
+  font-family: Arial;
 
   ${props => props.size && css`
     font-size: ${props.size};

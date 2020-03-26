@@ -45,7 +45,7 @@ export default class DoTweetBox extends React.Component {
         <Container maxWidth>
           <Container margin="1em 0">
             <InputTextarea
-              size="1.4em"
+              size="19px"
               placeholder="いまどうしてる？"
               onChange={this.textareaOnChange}
               rows="1"

@@ -19,7 +19,7 @@ export default class DoTweetBox extends React.Component {
         </Container>
         <Container maxWidth>
           <Container margin="1em 0">
-            <InputTextarea size="1.4em" placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
+            <InputTextarea size="19px" placeholder="いまどうしてる？" onChange={this.props.changeEditText} />
           </Container>
           <Container>
             <Button onClick={this.props.submitTweet}>

@@ -1,20 +1,32 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { borderStyle } from './themeStyles';
+import TextareaAutosize from '@bit/mui-org.material-ui.textarea-autosize';
 
 
-const InputTextarea = styled.textarea`
-  color: white;
-  background-color: #00000000;
-  resize: none;
-  box-sizing: border-box;
-  width: 100%;
-  border: none;
-  outline: none;
+const InputTextarea = props => {
+  return (
+    <TextareaAutosize
+      className={props.className}
+      onChange={props.onChange}
+      placeholder={props.placeholder}
+      value={props.value}
+      style={{
+        color: "white",
+        backgroundColor: "#00000000",
+        resize: "none",
+        boxSizing: "border-box",
+        width: "100%",
+        border: "none",
+        outline: "none",
+        fontFamily: "Arial",
+        fontSize: (props.size || "inherit"),
+        ...props.style,
+      }}
+    />
+  );
+};
 
-  ${props => props.size && css`
-    font-size: ${props.size};
-  `}
-`;
 
 const Button = styled.button`
   border-radius: 9999px;

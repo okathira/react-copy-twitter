@@ -11,24 +11,39 @@ const rfc1738Encode = (str) => {
     .replace(/\*/g, '%2A');
 };
 
+const twitterAPI = axios.create({
+  baseURL: 'https://api.twitter.com/',
+});
 
 (async () => {
-  const bearerTokenCredential = Buffer.from(
-    rfc1738Encode(process.env.REACT_APP_TWITTER_API_KEY)
-    + ':'
-    + rfc1738Encode(process.env.REACT_APP_TWITTER_API_SECRET_KEY)
-  ).toString('base64');
-
-  const res = await axios.post(
-    'https://api.twitter.com/oauth2/token',
+  const bearerTokenResponse = await twitterAPI.post(
+    'oauth2/token',
     'grant_type=client_credentials',
     {
+      auth: {
+        username: rfc1738Encode(process.env.REACT_APP_TWITTER_API_KEY),
+        password: rfc1738Encode(process.env.REACT_APP_TWITTER_API_SECRET_KEY)
+      },
       headers: {
-        'Authorization': `Basic ${bearerTokenCredential}`,
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
     }
   ).catch(err => console.error(err));
+  const bearerToken = bearerTokenResponse.data.access_token;
+  console.log(`bearer token: ${bearerToken}`);
 
-  console.log(`bearer token: ${res.data.access_token}`);
+  const userTimelineResponse = await twitterAPI.get(
+    '1.1/statuses/user_timeline.json',
+    {
+      headers: { Authorization: `Bearer ${bearerToken}` },
+      params: {
+        screen_name: 'twitter',
+        count: 5,
+        exclude_replies: true,
+      },
+    }
+  ).catch(err => console.error(err));
+  console.log(userTimelineResponse.data);
 })();
+
+

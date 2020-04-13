@@ -17,7 +17,6 @@ const MainColumnContainer = styled.div`
   max-width: 600px;
   height: 100%;
   min-height: 100vh;
-  margin: auto auto auto 15% ;
   border-right: 1px ${borderStyle};
   border-left: 1px ${borderStyle};
 `;

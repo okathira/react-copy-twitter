@@ -33,7 +33,7 @@ export default class TweetScroller extends React.Component {
     // ツイート内容のみ反映したダミーデータ
     const tweet = {
       ...dummyData,
-      text: tweetText,
+      full_text: tweetText,
       time: Date.now()
     };
 

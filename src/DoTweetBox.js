@@ -49,7 +49,7 @@ export default class DoTweetBox extends React.Component {
     return (
       <DoTweetBoxContainer>
         <Container margin="0 10px">
-          <UserIcon src={dummyData.icon} alt="user-icon" />
+          <UserIcon src={dummyData.user.profile_image_url} alt="user-icon" />
         </Container>
         <Container w="100%">
           <Container margin="10px 0">

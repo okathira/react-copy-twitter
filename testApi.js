@@ -38,12 +38,16 @@ const twitterAPI = axios.create({
       headers: { Authorization: `Bearer ${bearerToken}` },
       params: {
         screen_name: 'twitter',
-        count: 5,
+        count: 10,
         exclude_replies: true,
+        include_rts: false,
+        tweet_mode: 'extended',
       },
     }
   ).catch(err => console.error(err));
   console.log(userTimelineResponse.data);
+
+  require('fs').writeFileSync('res.json', JSON.stringify(userTimelineResponse.data, null, '  '));
 })();
 
 

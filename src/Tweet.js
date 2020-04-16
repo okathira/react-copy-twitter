@@ -32,15 +32,15 @@ export default class Tweet extends React.Component {
     return (
       <TweetContainer tabIndex="0">
         <Container margin="0 10px">
-          <UserIcon src={this.data.icon} alt="user-icon" />
+          <UserIcon src={this.data.user.profile_image_url} alt="user-icon" />
         </Container>
         <Container>
           <Container>
-            <Text weight="bold">{this.data.userName}</Text>
-            <Text>@{this.data.screenName}</Text>
+            <Text weight="bold">{this.data.user.name}</Text>
+            <Text>@{this.data.user.screen_name}</Text>
           </Container>
           <Container margin="2px auto">
-            <BreakingText>{this.data.text}</BreakingText>
+            <BreakingText>{this.data.full_text}</BreakingText>
           </Container>
         </Container>
       </TweetContainer >

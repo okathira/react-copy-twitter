@@ -39,7 +39,7 @@ const twitterAPI = axios.create({
       params: {
         screen_name: 'twitter',
         count: 10,
-        exclude_replies: true,
+        exclude_replies: false,
         include_rts: false,
         tweet_mode: 'extended',
       },

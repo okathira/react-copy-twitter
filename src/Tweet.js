@@ -21,26 +21,19 @@ const TweetContainer = styled(ContentContainer)`
 
 
 export default class Tweet extends React.Component {
-  data = {};
-
-  constructor(props) {
-    super(props);
-    this.data = this.props.tweetData;
-  }
-
   render() {
     return (
       <TweetContainer tabIndex="0">
         <Container margin="0 10px">
-          <UserIcon src={this.data.user.profile_image_url} alt="user-icon" />
+          <UserIcon src={this.props.tweetData.user.profile_image_url} alt="user-icon" />
         </Container>
         <Container>
           <Container>
-            <Text weight="bold">{this.data.user.name}</Text>
-            <Text>@{this.data.user.screen_name}</Text>
+            <Text weight="bold">{this.props.tweetData.user.name}</Text>
+            <Text>@{this.props.tweetData.user.screen_name}</Text>
           </Container>
           <Container margin="2px auto">
-            <BreakingText>{this.data.full_text}</BreakingText>
+            <BreakingText>{this.props.tweetData.full_text}</BreakingText>
           </Container>
         </Container>
       </TweetContainer >

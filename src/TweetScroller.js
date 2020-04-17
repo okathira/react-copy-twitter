@@ -37,9 +37,34 @@ const getBearerToken = async () => {
 
     return bearerTokenResponse.data.access_token;
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
+
+const getUserTimeline = async (screenName, setToken) => {
+  try {
+    const bearerToken = setToken ? setToken : await getBearerToken();
+    const userTimelineResponse = await twitterAPI.get(
+      '1.1/statuses/user_timeline.json',
+      {
+        headers: { Authorization: `Bearer ${bearerToken}` },
+        params: {
+          screen_name: screenName,
+          count: 10,
+          exclude_replies: true,
+          include_rts: false,
+          tweet_mode: 'extended',
+        },
+      }
+    );
+    console.log(userTimelineResponse);
+
+    return userTimelineResponse.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 
 export default class TweetScroller extends React.Component {
   constructor(props) {
@@ -52,32 +77,8 @@ export default class TweetScroller extends React.Component {
     };
   }
 
-  getUserTimeline = async screenName => {
-    try {
-      const bearerToken = this.state.bearerToken ? this.state.bearerToken : await getBearerToken();
-      const userTimelineResponse = await twitterAPI.get(
-        '1.1/statuses/user_timeline.json',
-        {
-          headers: { Authorization: `Bearer ${bearerToken}` },
-          params: {
-            screen_name: screenName,
-            count: 10,
-            exclude_replies: true,
-            include_rts: false,
-            tweet_mode: 'extended',
-          },
-        }
-      );
-      console.log(userTimelineResponse);
-
-      return userTimelineResponse.data;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   componentDidMount() {
-    this.getUserTimeline('reactjs')
+    getUserTimeline('reactjs', this.state.bearerToken)
       .then(
         timelineTweets => {
           this.setState({

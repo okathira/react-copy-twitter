@@ -32,8 +32,7 @@ const getBearerToken = async () => {
   return bearerTokenResponse.data.access_token;
 };
 
-const getUserTimeline = async (givenToken, screenName) => {
-  const bearerToken = givenToken ? givenToken : await getBearerToken();
+const getUserTimeline = async (bearerToken, screenName) => {
   const userTimelineResponse = await twitterBaseAPI.get(
     '1.1/statuses/user_timeline.json',
     {

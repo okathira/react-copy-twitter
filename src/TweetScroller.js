@@ -18,21 +18,30 @@ export default class TweetScroller extends React.Component {
   }
 
   componentDidMount() {
-    twitterAPI.getUserTimeline(this.state.bearerToken, 'reactjs')
+    twitterAPI.getBearerToken()
+      .then(
+        bearerToken => {
+          this.setState({ bearerToken });
+          return twitterAPI.getUserTimeline(bearerToken, 'reactjs');
+        }
+      )
       .then(
         timelineTweets => {
           this.setState({
             isLoaded: true,
             timelineTweets,
           });
-        },
+        }
+      )
+      .catch(
         error => {
           this.setState({
             isLoaded: true,
             error
           });
           console.error(error);
-        });
+        }
+      );
   }
 
   submitTweet = tweetText => {

@@ -13,7 +13,7 @@ const InputTextarea = props => {
       value={props.value}
       style={{
         color: "white",
-        backgroundColor: "#00000000",
+        backgroundColor: "transparent",
         resize: "none",
         boxSizing: "border-box",
         width: "100%",
@@ -30,19 +30,11 @@ const InputTextarea = props => {
 
 const Button = styled.button`
   border-radius: 9999px;
+  margin: 0;
+  padding: 0;
   border: none;
-  background-color: rgb(29, 161, 242);
-  padding: 5px 15px;
-  transition-duration: 0.1s;
   outline: none;
-
-  :hover {
-    background-color: #1A91DA;
-  }
-
-  :focus-visible {
-    box-shadow: 0 0 0 2px #9CDCFE;
-  }
+  background-color: transparent;
 
   > * {
     user-select: none;
@@ -81,8 +73,11 @@ const Container = styled.div`
   ${props => props.padding && css`
     padding: ${props.padding};
   `}
-  ${props => props.maxWidth && css`
-    width: 100%;
+  ${props => props.w && css`
+    width: ${props.w};
+  `}
+  ${props => props.h && css`
+    height: ${props.h};
   `}
 `;
 

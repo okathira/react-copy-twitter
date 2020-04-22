@@ -2,39 +2,54 @@ import React from 'react';
 import DoTweetBox from './DoTweetBox';
 import Tweet from './Tweet';
 import dummyData from './dummyTweetData';
-import { Container } from './uiElements';
+import { Container, Text } from './uiElements';
+import twitterAPI from './twitterAPI';
 
 
 export default class TweetScroller extends React.Component {
   constructor(props) {
     super(props);
-
-    // タイムラインを読みこむ
     this.state = {
-      timelineTweets: (() => {
-        let existingTweets = [];
-        for (let i = 0; i < 3; i++) {
-          const tweet = {
-            ...dummyData,
-            time: i
-          };
-
-          existingTweets = [
-            tweet,
-            ...existingTweets
-          ];
-        }
-        return existingTweets;
-      })(),
+      error: null,
+      isLoaded: false,
+      timelineTweets: [],
+      bearerToken: null,
     };
+  }
+
+  componentDidMount() {
+    twitterAPI.getBearerToken()
+      .then(
+        bearerToken => {
+          this.setState({ bearerToken });
+          return twitterAPI.getUserTimeline(bearerToken, 'reactjs');
+        }
+      )
+      .then(
+        timelineTweets => {
+          this.setState({
+            isLoaded: true,
+            timelineTweets,
+          });
+        }
+      )
+      .catch(
+        error => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+          console.error(error);
+        }
+      );
   }
 
   submitTweet = tweetText => {
     // ツイート内容のみ反映したダミーデータ
     const tweet = {
       ...dummyData,
-      text: tweetText,
-      time: Date.now()
+      full_text: tweetText,
+      id_str: Date.now()
     };
 
     this.setState({
@@ -46,12 +61,23 @@ export default class TweetScroller extends React.Component {
   }
 
   render() {
+    const { error, isLoaded, timelineTweets } = this.state;
+    const timeline = (() => {
+      if (error) {
+        return <Text>Error: {error.message}</Text>;
+      } else if (!isLoaded) {
+        return <Text>Loading...</Text>;
+      } else {
+        return timelineTweets.map((tweetData) => (
+          <Tweet key={tweetData.id_str} tweetData={tweetData} />
+        ));
+      }
+    })();
+
     return (
       <Container>
         <DoTweetBox submitTweet={this.submitTweet} />
-        {this.state.timelineTweets.map((tweetData) => (
-          <Tweet key={tweetData.time} tweetData={tweetData} />
-        ))}
+        {timeline}
       </Container>
     );
   }

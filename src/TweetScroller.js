@@ -20,49 +20,41 @@ const twitterAPI = axios.create({
 });
 
 const getBearerToken = async () => {
-  try {
-    const bearerTokenResponse = await twitterAPI.post(
-      'oauth2/token',
-      'grant_type=client_credentials',
-      {
-        auth: {
-          username: rfc1738Encode(process.env.REACT_APP_TWITTER_API_KEY),
-          password: rfc1738Encode(process.env.REACT_APP_TWITTER_API_SECRET_KEY)
-        },
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        },
-      }
-    );
+  const bearerTokenResponse = await twitterAPI.post(
+    'oauth2/token',
+    'grant_type=client_credentials',
+    {
+      auth: {
+        username: rfc1738Encode(process.env.REACT_APP_TWITTER_API_KEY),
+        password: rfc1738Encode(process.env.REACT_APP_TWITTER_API_SECRET_KEY)
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+    }
+  );
 
-    return bearerTokenResponse.data.access_token;
-  } catch (err) {
-    throw err;
-  }
+  return bearerTokenResponse.data.access_token;
 };
 
-const getUserTimeline = async (screenName, setToken) => {
-  try {
-    const bearerToken = setToken ? setToken : await getBearerToken();
-    const userTimelineResponse = await twitterAPI.get(
-      '1.1/statuses/user_timeline.json',
-      {
-        headers: { Authorization: `Bearer ${bearerToken}` },
-        params: {
-          screen_name: screenName,
-          count: 10,
-          exclude_replies: true,
-          include_rts: false,
-          tweet_mode: 'extended',
-        },
-      }
-    );
-    console.log(userTimelineResponse);
+const getUserTimeline = async (givenToken, screenName) => {
+  const bearerToken = givenToken ? givenToken : await getBearerToken();
+  const userTimelineResponse = await twitterAPI.get(
+    '1.1/statuses/user_timeline.json',
+    {
+      headers: { Authorization: `Bearer ${bearerToken}` },
+      params: {
+        screen_name: screenName,
+        count: 10,
+        exclude_replies: true,
+        include_rts: false,
+        tweet_mode: 'extended',
+      },
+    }
+  );
+  console.log(userTimelineResponse);
 
-    return userTimelineResponse.data;
-  } catch (err) {
-    throw err;
-  }
+  return userTimelineResponse.data;
 };
 
 
@@ -78,7 +70,7 @@ export default class TweetScroller extends React.Component {
   }
 
   componentDidMount() {
-    getUserTimeline('reactjs', this.state.bearerToken)
+    getUserTimeline(this.state.bearerToken, 'reactjs')
       .then(
         timelineTweets => {
           this.setState({
@@ -91,6 +83,7 @@ export default class TweetScroller extends React.Component {
             isLoaded: true,
             error
           });
+          console.error(error);
         });
   }
 

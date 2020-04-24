@@ -1,12 +1,12 @@
 import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import SideNavbar from './SideNavbar';
 import MainColumn from './MainColumn';
-import { backgroundColor } from './themeStyles';
+import { ThemeContext } from './themeStyles';
 
 
 const Screen = styled.div`
-  background-color: ${backgroundColor};
+  background-color: ${props => props.theme.backgroundColor};
   display: flex;
 `;
 
@@ -16,13 +16,17 @@ const GlobalStyle = createGlobalStyle`
 
 
 export default class App extends React.Component {
+  static contextType = ThemeContext;
+
   render() {
     return (
-      <Screen>
-        <GlobalStyle />
-        <SideNavbar />
-        <MainColumn />
-      </Screen>
+      <ThemeProvider theme={this.context}>
+        <Screen>
+          <GlobalStyle />
+          <SideNavbar />
+          <MainColumn />
+        </Screen>
+      </ThemeProvider>
     );
   }
 }

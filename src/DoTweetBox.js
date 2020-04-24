@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import dummyData from './dummyTweetData';
-import { borderStyle } from './themeStyles';
 import { InputTextarea, Button, UserIcon, Text, Container, ContentContainer } from './uiElements';
 
 
 const DoTweetBoxContainer = styled(ContentContainer)`
-  border-bottom: 10px ${borderStyle};
+  border-bottom-width: 10px;
 `;
 
 const TweetButton = styled(Button)`

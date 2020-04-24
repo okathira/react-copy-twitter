@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { borderStyle } from './themeStyles';
 import TextareaAutosize from '@bit/mui-org.material-ui.textarea-autosize';
 
 
@@ -63,7 +62,7 @@ const ContentContainer = styled.div`
   display: flex;
   outline: none;
   align-items: stretch;
-  border-bottom: 1px ${borderStyle};
+  border-bottom: 1px solid ${props => props.theme.borderStyle};
 `;
 
 const Container = styled.div`
